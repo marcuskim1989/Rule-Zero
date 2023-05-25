@@ -8,62 +8,36 @@
 import GRDB
 
 struct SQLiteManager {
+    static let shared = try! DatabaseManager()
     
-    var dbQueue: DatabaseQueue
+    private let dbQueue: DatabaseQueue
     
-    init(dbQueue: DatabaseQueue) {
-        self.dbQueue = dbQueue
-    }
-    
-    func createProductTable() throws {
-        var migrator = DatabaseMigrator()
-        migrator.registerMigration("createProductTable") { db in
-            try db.create(table: Product.databaseTableName) { t in
-                t.column(Product.Columns.id.rawValue)
-                t.column(Product.Columns.name.rawValue)
-                t.column(Product.Columns.price.rawValue)
-            }
-        }
+    private init() throws {
+        // Initialize the database queue
+        dbQueue = try DatabaseQueue(path: "path/to/database.sqlite")
         
-        
+        // Run migrations to create tables
         try migrator.migrate(dbQueue)
-        
-        do {
-            try createProductTable()
-        } catch {
-            // Handle any errors
-            print("Error creating product table: \(error)")
-        }
     }
     
-    func insertProduct(id: inout Int64, name: inout String, price: inout Double) {
-        let product = Product(
-            id: id,
-            name: name,
-            price: price,
-            customAttributes: [:]
-        )
+    // Create the table using a migration
+    private var migrator: DatabaseMigrator {
+        var migrator = DatabaseMigrator()
         
-        do {
-            try dbQueue.write { db in
-                try product.save(db)
+        migrator.registerMigration("createProductsTable") { db in
+            try db.create(table: Product.databaseTableName) { t in
+                t.autoIncrementedPrimaryKey(Product.Columns.id)
+                t.column(Product.Columns.name).notNull()
+                t.column(Product.Columns.price).notNull()
             }
-            
-            // Clear form fields after successful insertion
-            name = ""
-            price = 0
-            category = ""
-            description = ""
-            rating = 0
-            
-            // Show success message
-            print("Product saved successfully!")
-        } catch {
-            // Handle error during database operation
-            print("Error saving product: \(error)")
         }
+        
+        // Add more migrations for other tables if needed
+        
+        return migrator
     }
-   
+    
+    // ... other database operations ...
 }
 
 
