@@ -8,21 +8,16 @@
 import Foundation
 import GRDB
 
-struct Product: TableRecord, Codable {
-    var id: Int64
+struct Product: Codable, FetchableRecord, PersistableRecord {
+    var id: Int
     var name: String
-    var price: Double
-    var customAttributes: [String: String]
+    var score: Int
     
-    
-    // Define the table name
-    static let databaseTableName = "product"
-    
-    // Define the columns
-    enum Columns: String, ColumnExpression, CaseIterable {
-        case id
-        case name
-        case price
-        case customAttributes
-    }
 }
+
+
+//struct Player: Codable, FetchableRecord, PersistableRecord {
+//    var id: String
+//    var name: String
+//    var score: Int
+//}

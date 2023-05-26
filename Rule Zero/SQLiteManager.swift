@@ -8,7 +8,7 @@
 import GRDB
 
 struct SQLiteManager {
-    static let shared = try! DatabaseManager()
+   // static let shared = try! DatabaseManager()
     
     private let dbQueue: DatabaseQueue
     
@@ -25,12 +25,20 @@ struct SQLiteManager {
         var migrator = DatabaseMigrator()
         
         migrator.registerMigration("createProductsTable") { db in
-            try db.create(table: Product.databaseTableName) { t in
-                t.autoIncrementedPrimaryKey(Product.Columns.id)
-                t.column(Product.Columns.name).notNull()
-                t.column(Product.Columns.price).notNull()
+            try db.create(table: "Hello, world!") { t in
+                t.autoIncrementedPrimaryKey("id")
+                t.column("john", .text).notNull()
+                t.column("score", .integer).notNull()
             }
         }
+        
+//        try dbQueue.write { db in
+//            try db.create(table: "player") { t in
+//                t.primaryKey("id", .text)
+//                t.column("name", .text).notNull()
+//                t.column("score", .integer).notNull()
+//            }
+//        }
         
         // Add more migrations for other tables if needed
         

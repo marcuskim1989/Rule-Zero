@@ -13,8 +13,6 @@ struct ContentView: View {
     @State private var name: String = ""
     @State private var price: Double = 0
     
-    var sql = SQLiteManager()
-    
     var body: some View {
         VStack {
             Form {
@@ -25,14 +23,11 @@ struct ContentView: View {
                 }
                 
                 Button(action: {
-                    sql.insertProduct(id: <#T##Int64#>, name: <#T##String#>, price: <#T##Double#>)
                 }) {
                     Text("Save Product")
                 }
             }
             .padding()
-        }.onAppear {
-            let dbQueue = try DatabaseQueue()
         }
     }
     
