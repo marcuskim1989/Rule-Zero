@@ -9,25 +9,31 @@ import SwiftUI
 import GRDB
 
 struct ContentView: View {
-    @State private var id: Int64 = -1
-    @State private var name: String = ""
-    @State private var price: Double = 0
+//    @State private var id: Int64 = -1
+//    @State private var name: String = ""
+//    @State private var price: Double = 0
     
     var body: some View {
         VStack {
-            Form {
-                Section(header: Text("Product Details")) {
-                    TextField("ID", value: $id, formatter: NumberFormatter())
-                    TextField("Name", text: $name)
-                    TextField("Price", value: $price, formatter: NumberFormatter())
-                }
-                
-                Button(action: {
-                }) {
-                    Text("Save Product")
-                }
-            }
-            .padding()
+//            Form {
+//                Section(header: Text("Product Details")) {
+////                    TextField("ID", value: $id, formatter: NumberFormatter())
+////                    TextField("Name", text: $name)
+////                    TextField("Price", value: $price, formatter: NumberFormatter())
+//                }
+//
+//                Button(action: {
+//                }) {
+//                    Text("Save Product")
+//                }
+//            }
+//            .padding()
+            
+            Text("Hello, World!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
+            
         }
     }
     
