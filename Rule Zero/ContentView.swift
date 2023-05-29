@@ -28,58 +28,88 @@ struct ContentView: View {
     let options5 = ["Horde", "Two-Headed Giant", "Star", "Archenemy", "Emperor", "Duel Commander"]
     @State private var selectedOption5 = "Option 1"
     
+    
+    
+    
     var body: some View {
+        
+        
+        
         VStack {
-            //            Form {
-            //                Section(header: Text("Product Details")) {
-            //                    TextField("ID", value: $id, formatter: NumberFormatter())
-            //                    TextField("Name", text: $name)
-            //                    TextField("Price", value: $price, formatter: NumberFormatter())
-            //                }
-            //
-            //                Button(action: {
-            //                }) {
-            //                    Text("Save Product")
-            //                }
-            //            }
-            //            .padding()
             
-            Picker("Select an option", selection: $selectedOption1) {
-                ForEach(options1, id: \.self) { option in
-                    Text(option)
+            VStack {
+                
+                Text("Colors")
+                
+                Picker("Select an option", selection: $selectedOption1) {
+                    ForEach(options1, id: \.self) { option in
+                        Text(option)
+                    }
+                    
+                }.pickerStyle(WheelPickerStyle())
+            }.onAppear {
+                do {
+                    let manager = try SQLiteManager()
+                    
+                } catch {
+                    print("Failed to create SQLiteManager instance: \(error)")
                 }
                 
-            }.pickerStyle(WheelPickerStyle())
-            
-            Picker("Select an option", selection: $selectedOption2) {
-                ForEach(options2, id: \.self) { option in
-                    Text(option)
-                }
                 
-            }.pickerStyle(WheelPickerStyle())
+            }
             
-            
-            Picker("Select an option", selection: $selectedOption3) {
-                ForEach(options3, id: \.self) { option in
-                    Text(option)
-                }
+            VStack {
                 
-            }.pickerStyle(WheelPickerStyle())
-            
-            Picker("Select an option", selection: $selectedOption4) {
-                ForEach(options4, id: \.self) { option in
-                    Text(option)
-                }
+                Text("Format")
                 
-            }.pickerStyle(WheelPickerStyle())
+                Picker("Select an option", selection: $selectedOption2) {
+                    ForEach(options2, id: \.self) { option in
+                        Text(option)
+                    }
+                    
+                }.pickerStyle(WheelPickerStyle())
+            }
             
             
-            Picker("Select an option", selection: $selectedOption5) {
-                ForEach(options5, id: \.self) { option in
-                    Text(option)
-                }
+            VStack {
                 
-            }.pickerStyle(WheelPickerStyle())
+                Text("Budget Constraints")
+                
+                Picker("Select an option", selection: $selectedOption3) {
+                    ForEach(options3, id: \.self) { option in
+                        Text(option)
+                    }
+                    
+                }.pickerStyle(WheelPickerStyle())
+            }
+            
+            VStack {
+                
+                Text("Limited Format")
+                
+                Picker("Select an option", selection: $selectedOption4) {
+                    ForEach(options4, id: \.self) { option in
+                        Text(option)
+                    }
+                    
+                }.pickerStyle(WheelPickerStyle())
+                
+                
+            }
+            
+            
+            
+            VStack {
+                
+                Text("Match rules")
+                
+                Picker("Select an option", selection: $selectedOption5) {
+                    ForEach(options5, id: \.self) { option in
+                        Text(option)
+                    }
+                    
+                }.pickerStyle(WheelPickerStyle())
+            }
         }
         
         

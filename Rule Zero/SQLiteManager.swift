@@ -6,31 +6,61 @@
 //
 
 import GRDB
+import Foundation
 
-struct SQLiteManager {
+class SQLiteManager {
    // static let shared = try! DatabaseManager()
     
-    private let dbQueue: DatabaseQueue
+    let dbQueue: DatabaseQueue
     
-    private init() throws {
+    init() throws {
         // Initialize the database queue
-        dbQueue = try DatabaseQueue(path: "path/to/database.sqlite")
+        
+        let databaseURL = try FileManager.default
+                    .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                    .appendingPathComponent("mydatabase.sqlite")
+        dbQueue = try DatabaseQueue(path: databaseURL.path)
         
         // Run migrations to create tables
         try migrator.migrate(dbQueue)
+        
+        if FileManager.default.fileExists(atPath: databaseURL.path) {
+            print("SQLite database file exists.")
+        } else {
+            print("SQLite database file does not exist.")
+        }
     }
     
     // Create the table using a migration
     private var migrator: DatabaseMigrator {
         var migrator = DatabaseMigrator()
         
-        migrator.registerMigration("createProductsTable") { db in
-            try db.create(table: "Hello, world!") { t in
+        migrator.registerMigration("createRuleBookTable") { db in
+            try db.create(table: "RuleBook") { t in
                 t.autoIncrementedPrimaryKey("id")
-                t.column("john", .text).notNull()
-                t.column("score", .integer).notNull()
+                t.column("Colors", .text).notNull()
+                t.column("Format", .integer).notNull()
+                t.column("Budget Constraints")
+                t.column("Limited")
+                t.column("Match")
             }
         }
+        
+        do {
+            let tableExists = try dbQueue.read { db in
+                try db.tableExists("RuleBook")
+            }
+            
+            
+            if tableExists {
+                print("Table 'RuleBook' exists.")
+            } else {
+                print("Table 'RuleBook' does not exist.")
+            }
+        } catch {
+            print("Error reading table")
+        }
+        
         
 //        try dbQueue.write { db in
 //            try db.create(table: "player") { t in
