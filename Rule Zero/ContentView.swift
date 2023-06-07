@@ -12,21 +12,27 @@ struct ContentView: View {
     //    @State private var id: Int64 = -1
     //    @State private var name: String = ""
     //    @State private var price: Double = 0
+    @State private var selectedColors = ""
+    @State private var selectedFormat = ""
+    @State private var selectedBudgetOption = ""
+    @State private var selectedLimitedFormat = ""
+    @State private var selectedMatchType = ""
     
-    let options1 = ["White", "Blue", "Black", "Red", "Green"]
-    @State private var selectedOption1 = "Option 1"
     
-    let options2 = ["Commander", "Brawl", "Oathbreaker", "100-Card Singleton", "Canadian Highlander", "Frontier", "Standard", "Pioneer", "Modern", "Legacy", "Vintage", "Block Constructed", "Tiny Leaders", "Old School 93/94", "Tribal", "Silver Bordered"]
-    @State private var selectedOption2 = "Option 1"
+    let colors = ["White", "Blue", "Black", "Red", "Green"]
     
-    let options3 = ["Penny Dreadful", "Pauper", "Peasant", "Artisan", "Rares-Only"]
-    @State private var selectedOption3 = "Option 1"
     
-    let options4 = ["Cube", "Draft", "Sealed", "Pack Wars", "Reverse Draft", "Rochester", "Chaos Draft"]
-    @State private var selectedOption4 = "Option 1"
+    let formats = ["Commander", "Brawl", "Oathbreaker", "100-Card Singleton", "Canadian Highlander", "Frontier", "Standard", "Pioneer", "Modern", "Legacy", "Vintage", "Block Constructed", "Tiny Leaders", "Old School 93/94", "Tribal", "Silver Bordered"]
     
-    let options5 = ["Horde", "Two-Headed Giant", "Star", "Archenemy", "Emperor", "Duel Commander"]
-    @State private var selectedOption5 = "Option 1"
+    
+    let budgetOptions = ["Penny Dreadful", "Pauper", "Peasant", "Artisan", "Rares-Only"]
+    
+    
+    let limitedFormats = ["Cube", "Draft", "Sealed", "Pack Wars", "Reverse Draft", "Rochester", "Chaos Draft"]
+    
+    
+    let matchTypes = ["Horde", "Two-Headed Giant", "Star", "Archenemy", "Emperor", "Duel Commander"]
+    
     
     
     
@@ -41,8 +47,8 @@ struct ContentView: View {
                 
                 Text("Colors")
                 
-                Picker("Select an option", selection: $selectedOption1) {
-                    ForEach(options1, id: \.self) { option in
+                Picker("Select an option", selection: $selectedColors) {
+                    ForEach(colors, id: \.self) { option in
                         Text(option)
                     }
                     
@@ -62,8 +68,8 @@ struct ContentView: View {
                 
                 Text("Format")
                 
-                Picker("Select an option", selection: $selectedOption2) {
-                    ForEach(options2, id: \.self) { option in
+                Picker("Select an option", selection: $selectedFormat) {
+                    ForEach(formats, id: \.self) { option in
                         Text(option)
                     }
                     
@@ -75,8 +81,8 @@ struct ContentView: View {
                 
                 Text("Budget Constraints")
                 
-                Picker("Select an option", selection: $selectedOption3) {
-                    ForEach(options3, id: \.self) { option in
+                Picker("Select an option", selection: $selectedBudgetOption) {
+                    ForEach(budgetOptions, id: \.self) { option in
                         Text(option)
                     }
                     
@@ -87,8 +93,8 @@ struct ContentView: View {
                 
                 Text("Limited Format")
                 
-                Picker("Select an option", selection: $selectedOption4) {
-                    ForEach(options4, id: \.self) { option in
+                Picker("Select an option", selection: $selectedLimitedFormat) {
+                    ForEach(limitedFormats, id: \.self) { option in
                         Text(option)
                     }
                     
@@ -99,17 +105,25 @@ struct ContentView: View {
             
             
             
-            VStack {
+            VStack() {
                 
                 Text("Match rules")
                 
-                Picker("Select an option", selection: $selectedOption5) {
-                    ForEach(options5, id: \.self) { option in
+                Picker("Select an option", selection: $selectedMatchType) {
+                    ForEach(matchTypes, id: \.self) { option in
                         Text(option)
                     }
                     
                 }.pickerStyle(WheelPickerStyle())
             }
+            
+            Button("Save") {
+                
+                let rulebook = RuleBook(colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
+                
+                
+
+                        }
         }
         
         
@@ -119,6 +133,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().previewInterfaceOrientation(.portrait)
+        
+        
     }
 }

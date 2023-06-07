@@ -20,7 +20,8 @@
 		2C33A4222A1C708D00437770 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C33A4212A1C708D00437770 /* FirebaseStorage */; };
 		2C33A4242A1C748900437770 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33A4232A1C748900437770 /* SQLiteManager.swift */; };
 		2C33A4262A1C752300437770 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33A4252A1C752300437770 /* FirestoreManager.swift */; };
-		2C33A4282A1C901C00437770 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33A4272A1C901C00437770 /* DataModel.swift */; };
+		2C33A4282A1C901C00437770 /* RuleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33A4272A1C901C00437770 /* RuleBook.swift */; };
+		2C35F9A62A303B2000F750E6 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35F9A52A303B2000F750E6 /* K.swift */; };
 		2CB94F992A13251F00CAD18D /* Rule_ZeroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB94F982A13251F00CAD18D /* Rule_ZeroApp.swift */; };
 		2CB94F9B2A13251F00CAD18D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB94F9A2A13251F00CAD18D /* ContentView.swift */; };
 		2CB94F9D2A13252100CAD18D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CB94F9C2A13252100CAD18D /* Assets.xcassets */; };
@@ -32,7 +33,8 @@
 		2C33A40C2A1C6CF600437770 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2C33A4232A1C748900437770 /* SQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
 		2C33A4252A1C752300437770 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		2C33A4272A1C901C00437770 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		2C33A4272A1C901C00437770 /* RuleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBook.swift; sourceTree = "<group>"; };
+		2C35F9A52A303B2000F750E6 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		2CB94F952A13251F00CAD18D /* Rule Zero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rule Zero.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB94F982A13251F00CAD18D /* Rule_ZeroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule_ZeroApp.swift; sourceTree = "<group>"; };
 		2CB94F9A2A13251F00CAD18D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,7 +90,8 @@
 				2CB94F9E2A13252100CAD18D /* Preview Content */,
 				2C33A4232A1C748900437770 /* SQLiteManager.swift */,
 				2C33A4252A1C752300437770 /* FirestoreManager.swift */,
-				2C33A4272A1C901C00437770 /* DataModel.swift */,
+				2C33A4272A1C901C00437770 /* RuleBook.swift */,
+				2C35F9A52A303B2000F750E6 /* K.swift */,
 			);
 			path = "Rule Zero";
 			sourceTree = "<group>";
@@ -189,9 +192,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C33A4282A1C901C00437770 /* DataModel.swift in Sources */,
+				2C33A4282A1C901C00437770 /* RuleBook.swift in Sources */,
 				2C33A4242A1C748900437770 /* SQLiteManager.swift in Sources */,
 				2CB94F9B2A13251F00CAD18D /* ContentView.swift in Sources */,
+				2C35F9A62A303B2000F750E6 /* K.swift in Sources */,
 				2CB94F992A13251F00CAD18D /* Rule_ZeroApp.swift in Sources */,
 				2C33A4262A1C752300437770 /* FirestoreManager.swift in Sources */,
 			);

@@ -36,39 +36,31 @@ class SQLiteManager {
         var migrator = DatabaseMigrator()
         
         migrator.registerMigration("createRuleBookTable") { db in
-            try db.create(table: "RuleBook") { t in
-                t.autoIncrementedPrimaryKey("id")
-                t.column("Colors", .text).notNull()
-                t.column("Format", .integer).notNull()
-                t.column("Budget Constraints")
-                t.column("Limited")
-                t.column("Match")
+            try db.create(table: K.tableName) { t in
+                t.autoIncrementedPrimaryKey(K.Columns.idColumn)
+                t.column(K.Columns.colorsColumn, .text).notNull()
+                t.column(K.Columns.formatColumn, .integer).notNull()
+                t.column(K.Columns.budgetContraintsColumn)
+                t.column(K.Columns.limitedColumn)
+                t.column(K.Columns.matchTypeColumn)
+                t.column(K.Columns.matchTypeColumn)
             }
         }
         
         do {
             let tableExists = try dbQueue.read { db in
-                try db.tableExists("RuleBook")
+                try db.tableExists(K.tableName)
             }
             
             
             if tableExists {
-                print("Table 'RuleBook' exists.")
+                print("Table \(K.tableName) exists.")
             } else {
-                print("Table 'RuleBook' does not exist.")
+                print("Table \(K.tableName) does not exist.")
             }
         } catch {
             print("Error reading table")
         }
-        
-        
-//        try dbQueue.write { db in
-//            try db.create(table: "player") { t in
-//                t.primaryKey("id", .text)
-//                t.column("name", .text).notNull()
-//                t.column("score", .integer).notNull()
-//            }
-//        }
         
         // Add more migrations for other tables if needed
         
