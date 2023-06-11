@@ -17,29 +17,21 @@ struct ContentView: View {
     @State private var selectedBudgetOption = ""
     @State private var selectedLimitedFormat = ""
     @State private var selectedMatchType = ""
-    
+    @State var ruleBook: RuleBook!
+    @State var sqliteManager: SQLiteManager!
     
     let colors = ["White", "Blue", "Black", "Red", "Green"]
     
     
     let formats = ["Commander", "Brawl", "Oathbreaker", "100-Card Singleton", "Canadian Highlander", "Frontier", "Standard", "Pioneer", "Modern", "Legacy", "Vintage", "Block Constructed", "Tiny Leaders", "Old School 93/94", "Tribal", "Silver Bordered"]
     
-    
     let budgetOptions = ["Penny Dreadful", "Pauper", "Peasant", "Artisan", "Rares-Only"]
     
-    
     let limitedFormats = ["Cube", "Draft", "Sealed", "Pack Wars", "Reverse Draft", "Rochester", "Chaos Draft"]
-    
-    
+
     let matchTypes = ["Horde", "Two-Headed Giant", "Star", "Archenemy", "Emperor", "Duel Commander"]
     
-    
-    
-    
-    
     var body: some View {
-        
-        
         
         VStack {
             
@@ -54,15 +46,12 @@ struct ContentView: View {
                     
                 }.pickerStyle(WheelPickerStyle())
             }.onAppear {
-                do {
-                    let manager = try SQLiteManager()
-                    
-                } catch {
-                    print("Failed to create SQLiteManager instance: \(error)")
-                }
-                
-                
+                initializeSQLiteManager()
             }
+            
+            
+            
+        }
             
             VStack {
                 
@@ -119,22 +108,70 @@ struct ContentView: View {
             
             Button("Save") {
                 
-                let rulebook = RuleBook(colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
+                let ruleBook = RuleBook(id: 1, colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
+                
+                do {
+                    try sqliteManager.addRuleBookToDatabase(ruleBook)
+                    
+                } catch {
+                    print("Adding Unsuccessful")
+                }
                 
                 
+                
+                
+                    
+                            }
+        
+        Button("Fetch") {
+           
+            do {
+                
+                let ruleBook = try sqliteManager.fetchRuleBookFromDatabase()
+                
+                Text("Colors: \(ruleBook.colors)")
+                Text("Format: \(ruleBook.format)")
+                Text("Budget Constraints: \(ruleBook.budgetConstraints)")
+                Text("Limited: \(ruleBook.limited)")
+                Text("Match Type: \(ruleBook.matchType)")
+                
+            } catch {
+                print("Failed to fetch data ")
+            }
+            
+            
+        }
+                
+                /*
+                 
+                 var colors: String
+                 var format: String
+                 var budgetConstraints: String
+                 var limited: String
+                 var matchType: String
+                 */
 
-                        }
+        
+            
+            
         }
         
         
+    
+
+    func initializeSQLiteManager() {
+        do {
+            self.sqliteManager = try SQLiteManager()
+        
+        } catch {
+            print("Could initialize SQLiteManager")
+        }
     }
 }
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().previewInterfaceOrientation(.portrait)
-        
-        
+            return ContentView()
     }
 }

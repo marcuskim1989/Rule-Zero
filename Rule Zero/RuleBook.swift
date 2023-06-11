@@ -9,6 +9,7 @@ import Foundation
 import GRDB
 
 struct RuleBook: Codable, FetchableRecord, PersistableRecord {
+    var id: Int = 1
     var colors: String
     var format: String
     var budgetConstraints: String
@@ -17,11 +18,12 @@ struct RuleBook: Codable, FetchableRecord, PersistableRecord {
     //var customRules: [String: String]
     
     enum CodingKeys: String, CodingKey {
+        case id
         case colors
         case format
-        case budgetConstraints = "budget_constraints"
+        case budgetConstraints
         case limited
-        case matchType = "match_type"
+        case matchType
         //case customRules = "custom_rules"
     }
 }

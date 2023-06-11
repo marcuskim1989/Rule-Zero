@@ -8,7 +8,7 @@
 import GRDB
 import Foundation
 
-class SQLiteManager {
+struct SQLiteManager {
    // static let shared = try! DatabaseManager()
     
     let dbQueue: DatabaseQueue
@@ -18,7 +18,7 @@ class SQLiteManager {
         
         let databaseURL = try FileManager.default
                     .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                    .appendingPathComponent("mydatabase.sqlite")
+                    .appendingPathComponent(K.tableName)
         dbQueue = try DatabaseQueue(path: databaseURL.path)
         
         // Run migrations to create tables
@@ -43,9 +43,21 @@ class SQLiteManager {
                 t.column(K.Columns.budgetContraintsColumn)
                 t.column(K.Columns.limitedColumn)
                 t.column(K.Columns.matchTypeColumn)
-                t.column(K.Columns.matchTypeColumn)
             }
         }
+        
+        
+        
+        // Add more migrations for other tables if needed
+        
+        return migrator
+    }
+    
+    func addRuleBookToDatabase(_ ruleBook: RuleBook) throws {
+            
+            try dbQueue.write { db in
+                try ruleBook.insert(db)
+            }
         
         do {
             let tableExists = try dbQueue.read { db in
@@ -61,13 +73,15 @@ class SQLiteManager {
         } catch {
             print("Error reading table")
         }
-        
-        // Add more migrations for other tables if needed
-        
-        return migrator
-    }
+        }
     
-    // ... other database operations ...
+    func fetchRuleBookFromDatabase() throws -> RuleBook {
+        try dbQueue.read { db in
+            let ruleBook = try RuleBook.fetchOne(db, key: 1)
+            return ruleBook ?? RuleBook(id: 1, colors: "error", format: "error", budgetConstraints: "error", limited: "error", matchType: "error")
+        
+        }
+    }
 }
 
 
