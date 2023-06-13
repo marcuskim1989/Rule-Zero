@@ -8,8 +8,19 @@
 import Foundation
 import GRDB
 
+/*
+ 
+ // 3. Define a record type
+ struct Player: Codable, FetchableRecord, PersistableRecord {
+     var id: String
+     var name: String
+     var score: Int
+ }
+ */
+
+
 struct RuleBook: Codable, FetchableRecord, PersistableRecord {
-    var id: Int = 1
+    var id: String
     var colors: String
     var format: String
     var budgetConstraints: String
@@ -18,12 +29,24 @@ struct RuleBook: Codable, FetchableRecord, PersistableRecord {
     //var customRules: [String: String]
     
     enum CodingKeys: String, CodingKey {
-        case id
-        case colors
-        case format
-        case budgetConstraints
-        case limited
-        case matchType
+        case id = "id"
+        case colors = "colors"
+        case format = "format"
+        case budgetConstraints = "budget_constraints"
+        case limited = "limited"
+        case matchType = "match_type"
         //case customRules = "custom_rules"
+        
+        /*
+         
+         "id"
+         "colors"
+         "format"
+         "budget_constraints"
+         "limited"
+         "match_type"
+         "custom_rules"
+         
+         */
     }
 }

@@ -12,11 +12,11 @@ struct ContentView: View {
     //    @State private var id: Int64 = -1
     //    @State private var name: String = ""
     //    @State private var price: Double = 0
-    @State private var selectedColors = ""
-    @State private var selectedFormat = ""
-    @State private var selectedBudgetOption = ""
-    @State private var selectedLimitedFormat = ""
-    @State private var selectedMatchType = ""
+    @State private var selectedColors = "White"
+    @State private var selectedFormat = "Commander"
+    @State private var selectedBudgetOption = "Penny Dreadful"
+    @State private var selectedLimitedFormat = "Cube"
+    @State private var selectedMatchType = "Horde"
     @State var ruleBook: RuleBook!
     @State var sqliteManager: SQLiteManager!
     
@@ -108,10 +108,13 @@ struct ContentView: View {
             
             Button("Save") {
                 
-                let ruleBook = RuleBook(id: 1, colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
+                let ruleBook = RuleBook(id: "id", colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
                 
                 do {
+                    
                     try sqliteManager.addRuleBookToDatabase(ruleBook)
+                    
+                    
                     
                 } catch {
                     print("Adding Unsuccessful")
