@@ -31,6 +31,23 @@ struct ContentView: View {
 
     let matchTypes = ["Horde", "Two-Headed Giant", "Star", "Archenemy", "Emperor", "Duel Commander"]
     
+
+    init() {
+            
+        //initializeSQLiteManager()
+        do {
+                  self.sqliteManager = try SQLiteManager()
+            
+            
+            
+            guard let sqliteManager = sqliteManager else {
+                    fatalError("SQLiteManager is not initialized")
+                }
+              } catch {
+                  fatalError("Failed to initialize SQLiteManager: \(error)")
+              }
+    }
+
     var body: some View {
         
         VStack {
@@ -45,9 +62,11 @@ struct ContentView: View {
                     }
                     
                 }.pickerStyle(WheelPickerStyle())
-            }.onAppear {
-                initializeSQLiteManager()
             }
+            
+//            .onAppear {
+//                initializeSQLiteManager()
+//            }
             
             
             
@@ -107,11 +126,12 @@ struct ContentView: View {
             }
             
             Button("Save") {
+               
                 
                 let ruleBook = RuleBook(id: "id", colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
                 
                 do {
-                    
+                    print(ruleBook)
                     try sqliteManager.addRuleBookToDatabase(ruleBook)
                     
                     
@@ -162,14 +182,14 @@ struct ContentView: View {
         
     
 
-    func initializeSQLiteManager() {
-        do {
-            self.sqliteManager = try SQLiteManager()
-        
-        } catch {
-            print("Could initialize SQLiteManager")
-        }
-    }
+//    func initializeSQLiteManager() {
+//        do {
+//            self.sqliteManager = try SQLiteManager()
+//
+//        } catch {
+//            print("Could initialize SQLiteManager")
+//        }
+//    }
 }
 
 

@@ -8,7 +8,7 @@
 import GRDB
 import Foundation
 
-struct SQLiteManager {
+class SQLiteManager {
    // static let shared = try! DatabaseManager()
     
     let dbQueue: DatabaseQueue
@@ -37,7 +37,7 @@ struct SQLiteManager {
         
         migrator.registerMigration("createRuleBookTable") { db in
             try db.create(table: K.tableName) { t in
-                t.primaryKey(K.Columns.idColumn, .text)
+                t.primaryKey(K.Columns.idColumn, .text)//.primaryKey()
                 t.column(K.Columns.colorsColumn)
                 t.column(K.Columns.formatColumn)
                 t.column(K.Columns.budgetContraintsColumn)

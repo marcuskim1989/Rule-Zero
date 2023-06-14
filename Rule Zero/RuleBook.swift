@@ -37,16 +37,17 @@ struct RuleBook: Codable, FetchableRecord, PersistableRecord {
         case matchType = "match_type"
         //case customRules = "custom_rules"
         
-        /*
-         
-         "id"
-         "colors"
-         "format"
-         "budget_constraints"
-         "limited"
-         "match_type"
-         "custom_rules"
-         
-         */
+        
     }
 }
+/*
+ 
+ "id"
+ "colors"
+ "format"
+ "budget_constraints"
+ "limited"
+ "match_type"
+ "custom_rules"
+ 
+ */
