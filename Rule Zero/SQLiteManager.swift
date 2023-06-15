@@ -11,24 +11,36 @@ import Foundation
 class SQLiteManager {
    // static let shared = try! DatabaseManager()
     
-    let dbQueue: DatabaseQueue
+    var dbQueue: DatabaseQueue
     
     init() throws {
         // Initialize the database queue
         
-        let databaseURL = try FileManager.default
-                    .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                    .appendingPathComponent(K.tableName)
-        dbQueue = try DatabaseQueue(path: databaseURL.path)
-        
-        // Run migrations to create tables
-        try migrator.migrate(dbQueue)
-        
-        if FileManager.default.fileExists(atPath: databaseURL.path) {
-            print("SQLite database file exists.")
-        } else {
-            print("SQLite database file does not exist.")
+        do {
+            
+            let databaseURL = try FileManager.default
+                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                .appendingPathComponent(K.tableName)
+            dbQueue = try DatabaseQueue(path: databaseURL.path)
+            
+            // Run migrations to create tables
+            try migrator.migrate(dbQueue)
+            
+            if FileManager.default.fileExists(atPath: databaseURL.path) {
+                print("SQLite database file exists.")
+            } else {
+                print("SQLite database file does not exist.")
+            }
+            
+            print("SQLiteManager initialization succeeded")
+        } catch {
+            
+            dbQueue = try DatabaseQueue(path: "unknown")
+            print("SQLiteManager initialization failed")
         }
+            
+        
+        
     }
     
     // Create the table using a migration

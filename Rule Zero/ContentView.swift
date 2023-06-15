@@ -36,16 +36,15 @@ struct ContentView: View {
             
         //initializeSQLiteManager()
         do {
-                  self.sqliteManager = try SQLiteManager()
+            self.sqliteManager = try SQLiteManager()
             
-            
-            
-            guard let sqliteManager = sqliteManager else {
-                    fatalError("SQLiteManager is not initialized")
-                }
-              } catch {
-                  fatalError("Failed to initialize SQLiteManager: \(error)")
-              }
+            print("self.sqliteManager is \(self.sqliteManager)")
+//            guard let sqliteManager = sqliteManager else {
+//                    fatalError("SQLiteManager is not initialized")
+//            }
+        } catch {
+            fatalError("Failed to initialize SQLiteManager: \(error)")
+        }
     }
 
     var body: some View {
@@ -132,6 +131,11 @@ struct ContentView: View {
                 
                 do {
                     print(ruleBook)
+                    
+//                    guard sqliteManager != nil {
+//                        print("sqliteManager is nil")
+//                    }
+                    
                     try sqliteManager.addRuleBookToDatabase(ruleBook)
                     
                     
