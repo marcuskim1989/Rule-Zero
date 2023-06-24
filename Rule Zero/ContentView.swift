@@ -12,6 +12,8 @@ struct ContentView: View {
     //    @State private var id: Int64 = -1
     //    @State private var name: String = ""
     //    @State private var price: Double = 0
+    
+    
     @State private var selectedColors = "White"
     @State private var selectedFormat = "Commander"
     @State private var selectedBudgetOption = "Penny Dreadful"
@@ -35,16 +37,7 @@ struct ContentView: View {
     init() {
             
         //initializeSQLiteManager()
-        do {
-            self.sqliteManager = try SQLiteManager()
-            
-            print("self.sqliteManager is \(self.sqliteManager)")
-//            guard let sqliteManager = sqliteManager else {
-//                    fatalError("SQLiteManager is not initialized")
-//            }
-        } catch {
-            fatalError("Failed to initialize SQLiteManager: \(error)")
-        }
+        
     }
 
     var body: some View {
@@ -69,6 +62,17 @@ struct ContentView: View {
             
             
             
+        }.onAppear {
+            do {
+                self.sqliteManager = try SQLiteManager()
+                
+                print("self.sqliteManager is \(self.sqliteManager)")
+    //            guard let sqliteManager = sqliteManager else {
+    //                    fatalError("SQLiteManager is not initialized")
+    //            }
+            } catch {
+                fatalError("Failed to initialize SQLiteManager: \(error)")
+            }
         }
             
             VStack {
@@ -181,7 +185,7 @@ struct ContentView: View {
         
             
             
-        }
+    }
         
         
     
