@@ -131,7 +131,7 @@ struct ContentView: View {
             Button("Save") {
                
                 
-                let ruleBook = RuleBook(id: "id", colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
+                let ruleBook = RuleBook(id: -1, colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
                 
                 do {
                     print(ruleBook)
@@ -160,11 +160,7 @@ struct ContentView: View {
                 
                 let ruleBook = try sqliteManager.fetchRuleBookFromDatabase()
                 
-                Text("Colors: \(ruleBook.colors)")
-                Text("Format: \(ruleBook.format)")
-                Text("Budget Constraints: \(ruleBook.budgetConstraints)")
-                Text("Limited: \(ruleBook.limited)")
-                Text("Match Type: \(ruleBook.matchType)")
+                print("ruleBook fetched: \(ruleBook)")
                 
             } catch {
                 print("Failed to fetch data ")

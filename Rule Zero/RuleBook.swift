@@ -20,7 +20,7 @@ import GRDB
 
 
 struct RuleBook: Codable, FetchableRecord, PersistableRecord {
-    var id: String
+    var id: Int
     var colors: String
     var format: String
     var budgetConstraints: String

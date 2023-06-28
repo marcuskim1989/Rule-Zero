@@ -22,7 +22,7 @@ struct K {
         
     }
     
-    static let tableName = "rule_book"
+    static let tableName = "ruleBook"
     
     
     
