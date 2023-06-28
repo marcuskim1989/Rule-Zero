@@ -135,7 +135,7 @@ class SQLiteManager {
         
         do {
             
-            try dbQueue.write { db in
+            try! dbQueue.write { db in
                 
                 try ruleBook.insert(db)
                 

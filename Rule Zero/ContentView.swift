@@ -140,7 +140,7 @@ struct ContentView: View {
 //                        print("sqliteManager is nil")
 //                    }
                     
-                    try sqliteManager.addRuleBookToDatabase(ruleBook)
+                    try sqliteManager!.addRuleBookToDatabase(ruleBook)
                     
                     
                     
