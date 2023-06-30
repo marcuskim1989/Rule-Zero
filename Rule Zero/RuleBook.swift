@@ -19,8 +19,8 @@ import GRDB
  */
 
 
-struct RuleBook: Codable, FetchableRecord, PersistableRecord {
-    var id: String
+struct RuleBook: Codable, FetchableRecord, PersistableRecord, Identifiable {
+    var id: Int64?
     var colors: String
     var format: String
     var budgetConstraints: String
@@ -29,7 +29,7 @@ struct RuleBook: Codable, FetchableRecord, PersistableRecord {
     //var customRules: [String: String]
     
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case id
         case colors = "colors"
         case format = "format"
         case budgetConstraints = "budget_constraints"
@@ -40,6 +40,14 @@ struct RuleBook: Codable, FetchableRecord, PersistableRecord {
         
     }
 }
+
+extension RuleBook: MutablePersistableRecord {
+    // Update auto-incremented id upon successful insertion
+    mutating func didInsert(_ inserted: InsertionSuccess) {
+        id = inserted.rowID
+    }
+}
+
 /*
  
  "id"

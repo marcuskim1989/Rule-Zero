@@ -49,7 +49,7 @@ class SQLiteManager {
         
         migrator.registerMigration("createRuleBookTable") { db in
             try db.create(table: K.tableName) { t in
-                t.primaryKey(K.Columns.idColumn, .text)//.primaryKey()
+                t.autoIncrementedPrimaryKey(K.Columns.idColumn)
                 t.column(K.Columns.colorsColumn)
                 t.column(K.Columns.formatColumn)
                 t.column(K.Columns.budgetContraintsColumn)
@@ -137,7 +137,9 @@ class SQLiteManager {
             
             try dbQueue.write { db in
                 
-                try ruleBook.insert(db)
+                try! ruleBook.insert(db)
+                
+                
                 
             }
             
@@ -149,7 +151,7 @@ class SQLiteManager {
     func fetchRuleBookFromDatabase() throws -> RuleBook {
         try dbQueue.read { db in
             let ruleBook = try RuleBook.fetchOne(db, key: 1)
-            return ruleBook ?? RuleBook(id: "id", colors: "error", format: "error", budgetConstraints: "error", limited: "error", matchType: "error")
+            return ruleBook ?? RuleBook(id: 0, colors: "error", format: "error", budgetConstraints: "error", limited: "error", matchType: "error")
         
         }
     }

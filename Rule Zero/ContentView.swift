@@ -12,6 +12,8 @@ struct ContentView: View {
     //    @State private var id: Int64 = -1
     //    @State private var name: String = ""
     //    @State private var price: Double = 0
+    
+    
     @State private var selectedColors = "White"
     @State private var selectedFormat = "Commander"
     @State private var selectedBudgetOption = "Penny Dreadful"
@@ -35,16 +37,7 @@ struct ContentView: View {
     init() {
             
         //initializeSQLiteManager()
-        do {
-            self.sqliteManager = try SQLiteManager()
-            
-            print("self.sqliteManager is \(self.sqliteManager)")
-//            guard let sqliteManager = sqliteManager else {
-//                    fatalError("SQLiteManager is not initialized")
-//            }
-        } catch {
-            fatalError("Failed to initialize SQLiteManager: \(error)")
-        }
+        
     }
 
     var body: some View {
@@ -69,6 +62,17 @@ struct ContentView: View {
             
             
             
+        }.onAppear {
+            do {
+                self.sqliteManager = try SQLiteManager()
+                
+                print("self.sqliteManager is \(self.sqliteManager)")
+    //            guard let sqliteManager = sqliteManager else {
+    //                    fatalError("SQLiteManager is not initialized")
+    //            }
+            } catch {
+                fatalError("Failed to initialize SQLiteManager: \(error)")
+            }
         }
             
             VStack {
@@ -127,7 +131,7 @@ struct ContentView: View {
             Button("Save") {
                
                 
-                let ruleBook = RuleBook(id: "id", colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
+                let ruleBook = RuleBook(id: 1, colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
                 
                 do {
                     print(ruleBook)
@@ -136,7 +140,7 @@ struct ContentView: View {
 //                        print("sqliteManager is nil")
 //                    }
                     
-                    try sqliteManager.addRuleBookToDatabase(ruleBook)
+                    try sqliteManager!.addRuleBookToDatabase(ruleBook)
                     
                     
                     
@@ -156,11 +160,7 @@ struct ContentView: View {
                 
                 let ruleBook = try sqliteManager.fetchRuleBookFromDatabase()
                 
-                Text("Colors: \(ruleBook.colors)")
-                Text("Format: \(ruleBook.format)")
-                Text("Budget Constraints: \(ruleBook.budgetConstraints)")
-                Text("Limited: \(ruleBook.limited)")
-                Text("Match Type: \(ruleBook.matchType)")
+                print("ruleBook fetched: \(ruleBook)")
                 
             } catch {
                 print("Failed to fetch data ")
@@ -181,7 +181,7 @@ struct ContentView: View {
         
             
             
-        }
+    }
         
         
     
