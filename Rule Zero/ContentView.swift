@@ -131,7 +131,7 @@ struct ContentView: View {
             Button("Save") {
                
                 
-                let ruleBook = RuleBook(id: -1, colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
+                let ruleBook = RuleBook(id: 1, colors: selectedColors, format: selectedFormat, budgetConstraints: selectedBudgetOption, limited: selectedLimitedFormat, matchType: selectedMatchType)
                 
                 do {
                     print(ruleBook)
