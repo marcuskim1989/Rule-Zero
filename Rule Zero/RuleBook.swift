@@ -48,14 +48,3 @@ extension RuleBook: MutablePersistableRecord {
     }
 }
 
-/*
- 
- "id"
- "colors"
- "format"
- "budget_constraints"
- "limited"
- "match_type"
- "custom_rules"
- 
- */

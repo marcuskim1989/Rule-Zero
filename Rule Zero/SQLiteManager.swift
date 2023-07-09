@@ -9,7 +9,7 @@ import GRDB
 import Foundation
 
 class SQLiteManager {
-   // static let shared = try! DatabaseManager()
+   
     
     var dbQueue: DatabaseQueue
     
@@ -55,25 +55,7 @@ class SQLiteManager {
                 t.column(K.Columns.budgetContraintsColumn)
                 t.column(K.Columns.limitedColumn)
                 t.column(K.Columns.matchTypeColumn)
-                
-                /*
-                 case id = "id"
-                 case colors = "colors"
-                 case format = "format"
-                 case budgetConstraints = "budget_constraints"
-                 case limited = "limited"
-                 case matchType = "match_type"
-                 
-                 
-                 static let idColumn = "id"
-                 static let colorsColumn = "colors"
-                 static let formatColumn = "format"
-                 static let budgetContraintsColumn = "budget_constraints"
-                 static let limitedColumn = "limited"
-                 static let matchTypeColumn = "match_type"
-                 static let customRulesColumn = "custom_rules"
-                 
-                 */
+            
             }
         }
         
@@ -91,42 +73,12 @@ class SQLiteManager {
         } catch {
             print("Error reading table")
         }
-        /*
-         
-         let dbQueue = try DatabaseQueue(path: "/path/to/database.sqlite")
-
-         // 2. Define the database schema
-         try dbQueue.write { db in
-             try db.create(table: "player") { t in
-                 t.primaryKey("id", .text)
-                 t.column("name", .text).notNull()
-                 t.column("score", .integer).notNull()
-             }
-         }
-
-         
-
-         
-
-         let players: [Player] = try dbQueue.read { db in
-             try Player.fetchAll(db)
-         }
-         
-         */
-        
-        // Add more migrations for other tables if needed
+      
         
         return migrator
     }
     
-    /*
-     
-     // 4. Write and read in the database
-     try dbQueue.write { db in
-         try Player(id: "1", name: "Arthur", score: 100).insert(db)
-         try Player(id: "2", name: "Barbara", score: 1000).insert(db)
-     }
-     */
+
     
     
     func addRuleBookToDatabase(_ ruleBook: RuleBook) throws {
